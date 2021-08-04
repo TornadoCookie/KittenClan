@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdio.h>
+#include <defs.h>
 
 int ac;
 char **av;
@@ -17,34 +19,34 @@ void setMainParams(int argc, char **argv)
 char **argsToLookOutFor;
 int argCount;
 
-int *setArgsToLookOutFor(char **args, int count)
+void setArgsToLookOutFor(char **args, int count)
 {
-	int i;
-	int *res = malloc(count * sizeof(int)); 
-	for (i = 0; i < count; i++)
-	{
-		res[i] = i;
-		argsToLookOutFor[i] = args[i];
-	}
+	argsToLookOutFor = args;
 	argCount = count;
-	return res;
 }
 
 bool checkIfUnrecognizedOptionIsPresent()
 {
+	if (ac == 1) return false;
 	int i, j;
 	bool unrecognized = true;
+	printv("Looping through argv...");
 	for (i = 1; i < ac; i++)
 	{
+		printvwa("argv loop %d, ", i);
+		printvwa("%s\n", av[i]);
 		for (j = 0; j < argCount; j++)
 		{
-			if (strcmp(av[i], argsToLookOutFor[j]) == 0 || strcmp(av[i], strcat("-", argsToLookOutFor[j])) == 0)
+			printvwa("lookout loop %d, ", j);
+			printvwa("%s\n", argsToLookOutFor[j]);
+			if (*(av[i]) == '-' && strcmp(av[i], argsToLookOutFor[j]) == 0)
 			{
 				unrecognized = false;
 			}
 		}
 		if (unrecognized == true)
 		{
+			printv("Unrecognized is true, stopping");
 			break;
 		}
 	}
@@ -53,6 +55,7 @@ bool checkIfUnrecognizedOptionIsPresent()
 
 bool checkIfArgIsPresent(int arg)
 {
+	if (ac == 1) return false;
 	int i, k;
 	for (i = 1; i < ac; i++)
 	{

@@ -63,8 +63,9 @@ int main(int argc, char **argv)
 {
     verbose = false;
     //bool noargs = argc == 1 ? true : false;
-    puts("\nKittenClan v1\n\n");
+    puts("\nKittenClan v1\n");
     setMainParams(argc, argv);
+    //puts("Setting arguments...");
     char * argus[arg_count] = {
 	    [arg_b] = "-b",
 	    [arg_n] = "-n",
@@ -86,19 +87,25 @@ int main(int argc, char **argv)
 	    [arg_dod] = "--dod",
 	    [arg_health] = "--health"
     };
+    //puts("Registering arguments...");
     setArgsToLookOutFor(argus, arg_count);
-    if (checkIfUnrecognizedOptionIsPresent())
-    {
-	    puts("Unknown argument.\n");
-	    return 0;
-    }
+    //puts("Checking verbose flag...");
+    if (checkIfArgIsPresent(arg_verbose)) verbose = true;
+    printvwa("%s\n", verbose ? "true" : "false");
     if (checkIfArgIsPresent(arg_b) || checkIfArgIsPresent(arg_breed))
     {
 	    
     }
     if (checkIfArgIsPresent(arg_n) || checkIfArgIsPresent(arg_name))
     {
+	    printv("Setting name...");
 	   current_cat.name =  argv[(getIndexOfRecognizedArg(arg_n) || getIndexOfRecognizedArg(arg_name)) + 1];
+    }
+    printv("Checking for unrecognized options...");
+    if (checkIfUnrecognizedOptionIsPresent())
+    {
+            puts("Unknown argument.\n");
+            return 0;
     }
     puts("\nAnd, above all else, remember this one fact:\nNot all cats are the same. Some require other needs, or might not fit the description in this application. That's OK.");
     return 0;

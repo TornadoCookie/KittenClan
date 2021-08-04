@@ -19,7 +19,7 @@ void setMainParams(int argc, char **argv);
 //What it does:
 //Sets the arguments to look out for
 //Returns an array of ints that are the indices of the arguments.
-int *setArgsToLookOutFor(char **args, int count);
+void setArgsToLookOutFor(char **args, int count);
 
 //checkIfUnrecognizedOptionIsPresent
 //Is an unrecognized option present?
