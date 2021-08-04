@@ -22,18 +22,18 @@
 #define arg_s       0x04
 #define arg_f       0x05
 #define arg_d       0x06
-#define arg_h       0x07
-#define arg_breed   0x08
-#define arg_name    0x09
-#define arg_cat     0x0A
-#define arg_help    0x0B
-#define arg_version 0x0C
-#define arg_verbose 0x0D
-#define arg_save    0x0E
-#define arg_file    0x0F
-#define arg_dob     0x10
-#define arg_dod     0x11
-#define arg_health  0x12
+#define arg_breed   0x07
+#define arg_name    0x08
+#define arg_cat     0x09
+#define arg_help    0x0A
+#define arg_version 0x0B
+#define arg_verbose 0x0C
+#define arg_save    0x0D
+#define arg_file    0x0E
+#define arg_dob     0x0F
+#define arg_dod     0x10
+#define arg_health  0x11
+#define arg_count   0x12
 
 //The current cat.
 //This could either be loaded from file,
@@ -62,10 +62,10 @@ void pause(void)
 int main(int argc, char **argv)
 {
     verbose = false;
-    bool noargs = argc == 1 ? true : false;
+    //bool noargs = argc == 1 ? true : false;
     puts("\nKittenClan v1\n\n");
     setMainParams(argc, argv);
-    char **argus = {
+    char * argus[arg_count] = {
 	    [arg_b] = "-b",
 	    [arg_n] = "-n",
 	    [arg_c] = "-c",
@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 	    [arg_dod] = "--dod",
 	    [arg_health] = "--health"
     };
-    int *args = setArgsToLookOutFor(argus);
+    setArgsToLookOutFor(argus, arg_count);
     if (checkIfUnrecognizedOptionIsPresent())
     {
 	    puts("Unknown argument.\n");

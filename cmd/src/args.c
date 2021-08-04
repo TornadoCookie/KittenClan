@@ -53,7 +53,7 @@ bool checkIfUnrecognizedOptionIsPresent()
 
 bool checkIfArgIsPresent(int arg)
 {
-	int i, j, k;
+	int i, k;
 	for (i = 1; i < ac; i++)
 	{
 			if (strlen(argsToLookOutFor[arg]) <= 2)
@@ -79,7 +79,7 @@ bool checkIfArgIsPresent(int arg)
 
 int getIndexOfRecognizedArg(int arg)
 {
-	int i, j, k;
+	int i, k;
         for (i = 1; i < ac; i++)
         {
                         if (strlen(argsToLookOutFor[arg]) <= 2)
