@@ -98,7 +98,7 @@ int main(int argc, char **argv)
     }
     if (checkIfArgIsPresent(arg_n) || checkIfArgIsPresent(arg_name))
     {
-	   current_cat.name =  
+	   current_cat.name =  argv[(getIndexOfRecognizedArg(arg_n) || getIndexOfRecognizedArg(arg_name)) + 1];
     }
     puts("\nAnd, above all else, remember this one fact:\nNot all cats are the same. Some require other needs, or might not fit the description in this application. That's OK.");
     return 0;
